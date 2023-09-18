@@ -1,0 +1,23 @@
+.input-group-text{
+  background:white !important;
+  color: rgb(180, 180, 180);
+  font-size: 20px;
+}
+
+ion-content{
+  --background: rgb(211,195,251);
+  --background:  linear-gradient(324deg, rgba(211,195,251,1) 0%, rgba(194,180,237,1) 29%, rgba(160,150,208,1) 55%, rgba(137,130,188,1) 70%, rgba(65,67,126,1) 91%, rgba(43,48,107,1) 100%);
+}
+
+#formLogin{
+  position: fixed;
+  bottom: 0;
+  height: 75vh;
+  border-radius: 20px 20px 0px 0px;
+  background: white;
+  width: 100%;
+
+  box-shadow: 1px -1px 11px -1px rgba(0,0,0,0.71);
+  -webkit-box-shadow: 1px -1px 11px -1px rgba(0,0,0,0.71);
+  -moz-box-shadow: 1px -1px 11px -1px rgba(0,0,0,0.71);
+}

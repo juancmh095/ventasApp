@@ -1,17 +1,74 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" id="main-content">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>App</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="cart-outline" size="20"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" id="main-content">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-refresher slot="fixed" (ionRefresh)="loadInfoProductos($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item lines="inset">
+    <ion-icon name="location-outline" slot="start"></ion-icon>
+    <ion-label>
+      <p>Dirección de entrega:</p>
+      <h3>{{direccion.place_name}}</h3>
+    </ion-label>
+   <ion-label slot="end">
+    <p style="font-size: 9px;" routerLink="/direcciones">Cambiar dirección</p>
+   </ion-label>
+  </ion-item>
+
+  <div id="promosBanner" class="carousel slide" data-bs-ride="carousel" style="width: 90%; margin: auto;">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../assets/test/banner1.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/test/banner2.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../../assets/test/banner3.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3" id="promos">
+    <ion-segment [scrollable]="true" value="{{data[0]?.nombre}}">
+      <ion-segment-button value="{{item.nombre}}" *ngFor="let item of data" (click)="info(item.productos)">
+        <ion-icon name="home" ></ion-icon>
+        <p>{{item.nombre}}</p>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="productos">
+    <ion-card>
+      <ion-row *ngFor="let item of productos">
+        <ion-col size="4">
+          <img alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+        </ion-col>
+        <ion-col>
+          <ion-card-header>
+            <ion-card-title>{{item?.nombre}}</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
 </ion-content>

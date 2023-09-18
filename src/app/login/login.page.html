@@ -1,0 +1,38 @@
+
+<ion-content [fullscreen]="true">
+
+  <ion-row class="m-4">
+    <ion-col>
+      <h5><strong>Hola!!</strong></h5>
+      <h3><strong>Bienvenido</strong></h3>
+    </ion-col>
+    <ion-col class="text-center">
+      <img src="../../assets/logo-1.png" alt="" width="80" srcset="">
+    </ion-col>
+  </ion-row>
+  <ion-row class="p-4" id="formLogin">
+
+    <form (submit)="login()" autocomplete="off" style="width: 100%;" novalidate>
+      <h3><strong>Ingresa con tu cuenta</strong></h3>
+      <div class="input-group mb-4">
+        <span class="input-group-text" id="basic-addon1"><ion-icon name="mail-outline"></ion-icon></span>
+        <input type="email" class="form-control" placeholder="Email" aria-label="Username" autocomplete="off" aria-describedby="basic-addon1" style="border-left: none;">
+      </div>
+      <div class="input-group mb-5">
+        <span class="input-group-text"><ion-icon name="lock-closed-outline"></ion-icon></span>
+        <input type="password" class="form-control" placeholder="Contraseña" autocomplete="new-password" style="border-left: none; border-right: none;">
+        <span class="input-group-text">
+          <ion-icon name="eye-outline"></ion-icon>
+          <!-- <ion-icon name="eye-off-outline"></ion-icon> -->
+        </span>
+
+      </div>
+      <a style="color: gray; font-size: 12Spx;">Olvidé mi contraseña</a>
+
+      <ion-button type="submit" expand="block" class="mt-5">Iniciar sesión</ion-button>
+      <p style="text-align: center;">o</p>
+      <ion-button expand="block" fill="outline">Crear una cuenta</ion-button>
+
+    </form>
+  </ion-row>
+</ion-content>

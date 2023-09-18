@@ -1,0 +1,17 @@
+#promosBanner{
+  img{
+    max-height: 180px !important;
+    border-radius: 10px;
+  }
+}
+
+
+#promos{
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap !important;
+  p{
+    font-size: 10px;
+  }
+}

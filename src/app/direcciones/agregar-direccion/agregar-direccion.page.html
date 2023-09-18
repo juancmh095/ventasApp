@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mi Dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar animated="true" placeholder="Animated" (keyup)="loadDireccion($event)"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let item of direcciones">
+      <ion-label (click)="loadInfoMap(item)">{{item.place_name}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <p class="m-3">{{this.direccion.place_name}}</p>
+
+  <div id="map" class="m-auto" style="height: 300px !important; width: 90vw;"></div>
+
+
+  <ion-button type="button" (click)="saveDir()" expand="block" class="mt-5">Guardar</ion-button>
+
+</ion-content>
