@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Mis Productos Seleccionados</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="productos">
+    <ion-card *ngFor="let item of productosSelect; let i = index">
+      <ion-row >
+        <ion-col size="4">
+          <img *ngIf="!item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+          <img *ngIf="item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+        </ion-col>
+        <ion-col>
+          <ion-card-header style="padding: 0 !important;">
+            <ion-card-title>{{item?.producto.nombre}}</ion-card-title>
+            <ion-card-subtitle>{{item?.producto.descripcion}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="text-center" style="padding: 0 !important;">
+            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.producto.pvn | currency:'MXN'}}</ion-badge>
+            <div class="input-group mt-1" style="width: 60%; float: right;">
+              <span class="input-group-text" (click)="cantProduct('-',item._id,i)"><ion-icon  name="remove-outline"></ion-icon></span>
+              <input type="number" class="form-control" value="0" style="text-align: center; font-size: 10px;" name="numbersCant[{{i}}]" [(ngModel)]="numbersCant[i]">
+              <span class="input-group-text" (click)="cantProduct('+',item._id,i)"><ion-icon name="add-outline"></ion-icon></span>
+            </div>
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <table class="table table-striped m-3">
+      <tr>
+        <td style="font-weight: 900;">Sub Total: </td>
+        <td>{{subtotal | currency:'MXN'}}</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 900;">Impuestos: </td>
+        <td>{{(total-subtotal) | currency:'MXN'}}</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 900;">Total: </td>
+        <td>{{total | currency:'MXN'}}</td>
+      </tr>
+    </table>
+  </div>
+</ion-content>

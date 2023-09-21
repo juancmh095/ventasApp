@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/services/api.service';
+import { UtilsService } from 'src/services/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -7,15 +9,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor(private router: Router) { }
+  model:any = {};
+  constructor(
+    private router: Router,
+    private _api:ApiService,
+    private _utils:UtilsService
+  ) { }
 
   ngOnInit() {
   }
 
 
   login(){
-    this.router.navigate(['home'])
+    console.log(this.model);
+    this._api.post('login',this.model).then((response:any) => {
+      console.log(response);
+      if(response.status){
+        localStorage.setItem('token',response.token)
+        this.router.navigate(['home'])
+      }else{
+        this._utils.toast(response.text,'danger');
+      }
+    })
   }
 
 }

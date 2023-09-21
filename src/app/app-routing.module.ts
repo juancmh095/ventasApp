@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: '',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'direcciones',
-    loadChildren: () => import('./direcciones/agregar-direccion/agregar-direccion.module').then( m => m.AgregarDireccionPageModule)
+    path: 'agregar-usuario',
+    loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
   },
-  {
-    path: 'direcciones/listado',
-    loadChildren: () => import('./direcciones/listado-direcciones/listado-direcciones.module').then( m => m.ListadoDireccionesPageModule)
-  }
+
 ];
 @NgModule({
   imports: [

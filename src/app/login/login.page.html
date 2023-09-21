@@ -16,11 +16,11 @@
       <h3><strong>Ingresa con tu cuenta</strong></h3>
       <div class="input-group mb-4">
         <span class="input-group-text" id="basic-addon1"><ion-icon name="mail-outline"></ion-icon></span>
-        <input type="email" class="form-control" placeholder="Email" aria-label="Username" autocomplete="off" aria-describedby="basic-addon1" style="border-left: none;">
+        <input type="email" class="form-control" placeholder="Email" aria-label="Username" autocomplete="new-password" aria-describedby="basic-addon1" style="border-left: none;" name="email" [(ngModel)]="model.email">
       </div>
       <div class="input-group mb-5">
         <span class="input-group-text"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" class="form-control" placeholder="Contraseña" autocomplete="new-password" style="border-left: none; border-right: none;">
+        <input type="password" class="form-control" placeholder="Contraseña" autocomplete="new-password" style="border-left: none; border-right: none;" name="password" [(ngModel)]="model.password">
         <span class="input-group-text">
           <ion-icon name="eye-outline"></ion-icon>
           <!-- <ion-icon name="eye-off-outline"></ion-icon> -->
@@ -31,8 +31,13 @@
 
       <ion-button type="submit" expand="block" class="mt-5">Iniciar sesión</ion-button>
       <p style="text-align: center;">o</p>
-      <ion-button expand="block" fill="outline">Crear una cuenta</ion-button>
+      <ion-button expand="block" fill="outline" routerLink="agregar-usuario">Crear una cuenta</ion-button>
 
     </form>
+    <ion-row class="text-center" style="width: 100%; height: 20px; bottom: 0px;">
+      <ion-col size="12">
+        <p class="text-center" style="bottom: 0px !important; font-size: 7px; color: gray; font-style: italic; text-align: center;"> Develop By STSTECHNOLOGY.MX</p>
+      </ion-col>
+    </ion-row>
   </ion-row>
 </ion-content>

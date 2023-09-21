@@ -7,8 +7,9 @@
     <ion-buttons slot="end">
       <ion-icon name="search-outline"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" (click)="openCarrito()">
       <ion-icon name="cart-outline" size="20"></ion-icon>
+      <ion-badge *ngIf="productosSelect.length > 0" slot="end" class="cantProd">{{productosSelect.length}}</ion-badge>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,10 +23,10 @@
     <ion-icon name="location-outline" slot="start"></ion-icon>
     <ion-label>
       <p>Dirección de entrega:</p>
-      <h3>{{direccion.place_name}}</h3>
+      <h3>{{direccion?.place_name}}</h3>
     </ion-label>
    <ion-label slot="end">
-    <p style="font-size: 9px;" routerLink="/direcciones">Cambiar dirección</p>
+    <p style="font-size: 9px;" routerLink="/home/direcciones">Cambiar dirección</p>
    </ion-label>
   </ion-item>
 
@@ -53,19 +54,27 @@
   </div>
 
   <div class="productos">
-    <ion-card>
-      <ion-row *ngFor="let item of productos">
+    <ion-card *ngFor="let item of productos; let i = index">
+      <ion-row >
         <ion-col size="4">
-          <img alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+          <img *ngIf="!item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+          <img *ngIf="item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
         </ion-col>
         <ion-col>
-          <ion-card-header>
-            <ion-card-title>{{item?.nombre}}</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          <ion-card-header style="padding: 0 !important;">
+            <ion-card-title style="font-size: 15px;">
+              {{item?.nombre}}
+            </ion-card-title>
+            <ion-card-subtitle>{{item?.descripcion}} </ion-card-subtitle>
           </ion-card-header>
 
-          <ion-card-content>
-            Here's a small text
+          <ion-card-content class="text-center" style="padding: 0 !important;">
+            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.pvn | currency:'MXN'}}</ion-badge>
+            <div class="input-group mt-1" style="width: 60%; float: right;">
+              <span class="input-group-text" (click)="cantProduct('-',item._id,i)"><ion-icon  name="remove-outline"></ion-icon></span>
+              <input type="number" class="form-control" value="0" style="text-align: center; font-size: 10px;" name="numbersCant[{{i}}]" [(ngModel)]="numbersCant[i]">
+              <span class="input-group-text" (click)="cantProduct('+',item._id,i)"><ion-icon name="add-outline"></ion-icon></span>
+            </div>
           </ion-card-content>
         </ion-col>
       </ion-row>

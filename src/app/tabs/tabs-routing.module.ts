@@ -23,6 +23,19 @@ const routes: Routes = [
         path: '',
         redirectTo: '/home/tab1',
         pathMatch: 'full'
+      },
+      {
+        path: 'direcciones',
+        loadChildren: () => import('../direcciones/agregar-direccion/agregar-direccion.module').then( m => m.AgregarDireccionPageModule)
+      },
+      {
+        path: 'direcciones/listado',
+        loadChildren: () => import('../direcciones/listado-direcciones/listado-direcciones.module').then( m => m.ListadoDireccionesPageModule)
+      },
+
+      {
+        path: 'carrito',
+        loadChildren: () => import('../carrito/carrito.module').then( m => m.CarritoPageModule)
       }
     ]
   },
