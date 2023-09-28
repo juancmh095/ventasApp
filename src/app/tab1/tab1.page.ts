@@ -32,7 +32,9 @@ export class Tab1Page {
 
   loadStorageCarrito(){
     var c:any = localStorage.getItem('carrito');
-    this.productosSelect = JSON.parse(c);
+    if(c){
+      this.productosSelect = JSON.parse(c);
+    }
   }
 
 

@@ -20,8 +20,8 @@
       </div>
       <div class="input-group mb-5">
         <span class="input-group-text"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" class="form-control" placeholder="Contraseña" autocomplete="new-password" style="border-left: none; border-right: none;" name="password" [(ngModel)]="model.password">
-        <span class="input-group-text">
+        <input type="{{iPass}}" class="form-control" placeholder="Contraseña" autocomplete="new-password" style="border-left: none; border-right: none;" name="password" [(ngModel)]="model.password">
+        <span class="input-group-text" (click)="changeType()">
           <ion-icon name="eye-outline"></ion-icon>
           <!-- <ion-icon name="eye-off-outline"></ion-icon> -->
         </span>

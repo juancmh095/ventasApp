@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    window.matchMedia('(prefers-color-scheme: dark)');
   }
 }

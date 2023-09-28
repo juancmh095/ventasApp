@@ -10,6 +10,7 @@ import { UtilsService } from 'src/services/utils.service';
 })
 export class LoginPage implements OnInit {
   model:any = {};
+  iPass:any = 'password';
   constructor(
     private router: Router,
     private _api:ApiService,
@@ -31,6 +32,14 @@ export class LoginPage implements OnInit {
         this._utils.toast(response.text,'danger');
       }
     })
+  }
+
+  changeType(){
+    if(this.iPass == 'password'){
+      this.iPass = 'text';
+    }else{
+      this.iPass = 'password';
+    }
   }
 
 }
