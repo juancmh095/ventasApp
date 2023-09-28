@@ -7,6 +7,8 @@ import { CarritoPage } from '../carrito/carrito.page';
 import { UtilsService } from 'src/services/utils.service';
 
 
+declare var bootstrap:any;
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -28,6 +30,13 @@ export class Tab1Page {
     console.log(this.direccion);
     this.loadInfoProductos({});
     this.loadStorageCarrito();
+
+    const myCarouselElement = document.querySelector('#promosBanner')
+
+    const carousel = new bootstrap.Carousel(myCarouselElement, {
+      interval: 3000,
+      touch: false
+    })
   }
 
   loadStorageCarrito(){
