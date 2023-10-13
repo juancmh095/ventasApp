@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/services/api.service';
 import { CarritoPage } from '../carrito/carrito.page';
 import { UtilsService } from 'src/services/utils.service';
+import { ProductosService } from 'src/services/productos.service';
 
 
 declare var bootstrap:any;
@@ -21,7 +22,10 @@ export class Tab1Page {
   productosSelect:any = [];
   numbersCant:any = [];
   api:any = environment.api;
-  constructor(public _api:ApiService, private modalCtrl: ModalController, public _utils:UtilsService) {}
+  constructor(public _api:ApiService,
+    private _productosService:ProductosService,
+    private modalCtrl: ModalController,
+    public _utils:UtilsService) {}
 
 
   async ngOnInit() {
@@ -48,14 +52,16 @@ export class Tab1Page {
 
 
   loadInfoProductos(event:any){
-    this._api.get('producto/categorias',{}).then((response:any) => {
+    this._productosService.get().then((response:any)=>{
       console.log(response);
-      this.data = response.data;
+      this.data = response;
       this.productos = this.data[0].productos;
       this.numbersCant = [];
       event.target?.complete();
       this.stopSpinner();
-    });
+    })
+   /*  this._api.get('producto/categorias',{}).then((response:any) => {
+    }); */
   }
 
   info(data:any){

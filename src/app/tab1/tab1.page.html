@@ -47,7 +47,7 @@
   <div class="row mt-3" id="promos">
     <ion-segment [scrollable]="true" value="{{data[0]?.nombre}}">
       <ion-segment-button value="{{item.nombre}}" *ngFor="let item of data" (click)="info(item.productos)">
-        <ion-icon name="home" ></ion-icon>
+        <img src="{{api+'lioren/file/'+item.nombre+'.png'}}" alt="" width="50" style="margin: 10px;">
         <p>{{item.nombre}}</p>
       </ion-segment-button>
     </ion-segment>

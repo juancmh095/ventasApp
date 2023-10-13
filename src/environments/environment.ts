@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  //api:'http://localhost:3000/',
-  api:'https://erp-api-r2h7.onrender.com/',
+  api:'http://localhost:3000/',
+  //api:'https://erp-api-r2h7.onrender.com/',
   mapbox:{
     accessToken:'pk.eyJ1IjoianVhbm1lbmRlejk1IiwiYSI6ImNrdnFkNTk4dWRnNXUydnQ5YjN2ZGpndWEifQ.HkeKq336tquedpaUp_gJrQ'
-  }
+  },
 };
 
 /*
