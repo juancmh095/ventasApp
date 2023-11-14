@@ -7,11 +7,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card style="border-radius: 10px;">
+    <ion-card-header style="padding-bottom: 0px;">
+      <ion-card-title>
+        <img alt="" width="40" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        Pedido #
+      </ion-card-title>
+      <ion-card-subtitle>
+        <div class="badge bg-success"> Estatus:</div>
+      </ion-card-subtitle>
+    </ion-card-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card-content style="padding-bottom: 0px;">
+      <ion-accordion-group (ionChange)="accordionGroupChange($event)">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="">
+            <ion-label>Detalle de productos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">First Content</div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+    <ion-item lines="none">
+      <ion-label style="font-size: 12px;">Total</ion-label>
+      <ion-note slot="start">fecha</ion-note>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -1,21 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UtilsService {
+export class UtilsService implements OnInit {
 
   loading:any;
 
   constructor(
     private loadingCtrl: LoadingController,
     private toastController: ToastController
-  ) { }
+  ) {
+    this.createSpinner();
+  }
+
+  async ngOnInit() {
+  }
+
+  async createSpinner(){
+    this.loading = await this.loadingCtrl.create();
+
+  }
 
   async spinner(){
-    this.loading = await this.loadingCtrl.create();
-    this.loading.present();
+    this.loading?.present();
   }
 
   async stopSpinner(){
@@ -25,7 +34,7 @@ export class UtilsService {
   async toast(msg:any,color:'danger'|'success'|'warning'){
     const toast = await this.toastController.create({
       message: msg,
-      duration: 1500,
+      duration: 5000,
       position: 'bottom',
       color:color
     });

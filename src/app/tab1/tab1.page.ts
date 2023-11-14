@@ -6,6 +6,8 @@ import { ApiService } from 'src/services/api.service';
 import { CarritoPage } from '../carrito/carrito.page';
 import { UtilsService } from 'src/services/utils.service';
 import { ProductosService } from 'src/services/productos.service';
+import { AgregarDireccionPage } from '../direcciones/agregar-direccion/agregar-direccion.page';
+
 
 
 declare var bootstrap:any;
@@ -70,7 +72,7 @@ export class Tab1Page {
 
   async cantProduct(type:'+'|'-',id:any,index:any){
     var productoIdx:any = await this.loadIndexID(this.productosSelect,id);
-    console.log(productoIdx);
+    console.log(productoIdx,id,index);
     if(productoIdx != null){
       if(type == '+'){
         this.productosSelect[productoIdx].cantidad = this.productosSelect[productoIdx].cantidad + 1;
@@ -132,6 +134,21 @@ export class Tab1Page {
     setTimeout(() => {
       this._utils.stopSpinner();
     }, 3000);
+  }
+
+  async loadModalDir(){
+    const modal = await this.modalCtrl.create({
+      component: AgregarDireccionPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      var dt:any = localStorage.getItem('myDireccionVT');
+      this.direccion = JSON.parse(dt);
+    }
+
   }
 
 }

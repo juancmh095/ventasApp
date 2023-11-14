@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: Tab1Page,
+  },
+  {
+    path: 'pedido-confirmar',
+    loadChildren: () => import('../pedido-confirmar/pedido-confirmar.module').then( m => m.PedidoConfirmarPageModule)
   }
 ];
 

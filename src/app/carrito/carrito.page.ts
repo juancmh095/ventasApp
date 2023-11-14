@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -12,15 +13,15 @@ export class CarritoPage implements OnInit {
   numbersCant:any = [];
   subtotal:any = 0;
   total:any = 0;
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController, private router:Router) {}
 
   ngOnInit() {
     var c:any = localStorage.getItem('carrito');
     this.productosSelect = JSON.parse(c);
     this.productosSelect.forEach((element:any,index:any) => {
       this.numbersCant[index] = element.cantidad;
-      this.subtotal += element.producto.pvb;
-      this.total += element.producto.pvn;
+      this.subtotal += element.producto.precioventabruto;
+      this.total += (element.producto.precioventabruto * 1.18);
     });
   }
 
@@ -42,6 +43,7 @@ export class CarritoPage implements OnInit {
       }
     }
 
+    this.resum();
     var p = JSON.stringify(this.productosSelect);
     localStorage.setItem('carrito',p);
     console.log(this.productosSelect,this.numbersCant);
@@ -63,7 +65,18 @@ export class CarritoPage implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
+  resum(){
+    this.subtotal = 0;
+    this.total = 0;
+    this.productosSelect.forEach((element:any,index:any) => {
+      this.numbersCant[index] = element.cantidad;
+      this.subtotal += element.producto.precioventabruto;
+      this.total += (element.producto.precioventabruto * 1.18);
+    });
+  }
+
   confirm() {
-    //return this.modalCtrl.dismiss(this.name, 'confirm');
+    this.router.navigateByUrl('/home/tab1/pedido-confirmar')
+    return this.modalCtrl.dismiss('confirmar', 'confirm');
   }
 }

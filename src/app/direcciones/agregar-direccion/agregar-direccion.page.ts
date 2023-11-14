@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MapService, Feature } from 'src/services/map.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar-direccion',
@@ -12,7 +13,7 @@ export class AgregarDireccionPage implements OnInit {
   fill:any;
   direcciones:any;
   direccion:any = {};
-  constructor(private mapboxService: MapService, public router:Router) {
+  constructor(private mapboxService: MapService, public router:Router, private modalCtrl:ModalController) {
   }
 
   async ngOnInit() {
@@ -50,7 +51,8 @@ export class AgregarDireccionPage implements OnInit {
     var dir = JSON.stringify(this.direccion);
 
     await localStorage.setItem('myDireccionVT',dir);
-    this.router.navigate(['home'])
+    //this.router.navigate(['home'])
+    return this.modalCtrl.dismiss('confirmar', 'confirm');
   }
 
 

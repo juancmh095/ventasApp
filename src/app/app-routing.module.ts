@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'agregar-usuario',
     loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
-  },
+  }
 
 ];
 @NgModule({

@@ -25,7 +25,7 @@
           </ion-card-header>
 
           <ion-card-content class="text-center" style="padding: 0 !important;">
-            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.producto.pvn | currency:'MXN'}}</ion-badge>
+            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.producto.pvn | currency:'CLP'}}</ion-badge>
             <div class="input-group mt-1" style="width: 60%; float: right;">
               <span class="input-group-text" (click)="cantProduct('-',item._id,i)"><ion-icon  name="remove-outline"></ion-icon></span>
               <input type="number" class="form-control" value="0" style="text-align: center; font-size: 10px;" name="numbersCant[{{i}}]" [(ngModel)]="numbersCant[i]">
@@ -39,15 +39,15 @@
     <table class="table table-striped m-3">
       <tr>
         <td style="font-weight: 900;">Sub Total: </td>
-        <td>{{subtotal | currency:'MXN'}}</td>
+        <td>{{subtotal | currency:'CLP'}}</td>
       </tr>
       <tr>
         <td style="font-weight: 900;">Impuestos: </td>
-        <td>{{(total-subtotal) | currency:'MXN'}}</td>
+        <td>{{(total-subtotal) | currency:'CLP'}}</td>
       </tr>
       <tr>
         <td style="font-weight: 900;">Total: </td>
-        <td>{{total | currency:'MXN'}}</td>
+        <td>{{total | currency:'CLP'}}</td>
       </tr>
     </table>
   </div>

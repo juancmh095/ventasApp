@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="main-content">
+<ion-content [fullscreen]="true" id="main-content" style="--background: #F8F9F9;">
 
   <ion-refresher slot="fixed" (ionRefresh)="loadInfoProductos($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -26,7 +26,7 @@
       <h3>{{direccion?.place_name}}</h3>
     </ion-label>
    <ion-label slot="end">
-    <p style="font-size: 9px;" routerLink="/home/direcciones">Cambiar dirección</p>
+    <p style="font-size: 9px;" (click)="loadModalDir()">Cambiar dirección</p>
    </ion-label>
   </ion-item>
 
@@ -44,21 +44,22 @@
     </div>
   </div>
 
-  <div class="row mt-3" id="promos">
-    <ion-segment [scrollable]="true" value="{{data[0]?.nombre}}">
-      <ion-segment-button value="{{item.nombre}}" *ngFor="let item of data" (click)="info(item.productos)">
-        <img src="{{api+'lioren/file/'+item.nombre+'.png'}}" alt="" width="50" style="margin: 10px;">
-        <p>{{item.nombre}}</p>
-      </ion-segment-button>
-    </ion-segment>
+  <p style="margin: 15px 15px; font-weight: 900;">Categorias:</p>
+  <div class="horizontal-scroll-contenedor">
+    <div class="text-center" *ngFor="let item of data" (click)="info(item.productos)">
+      <ion-avatar style="margin: auto !important; width: 45px; height: 45px;">
+        <img src="{{api+'lioren/file/'+item.nombre+'.png'}}" style="width: auto;">
+      </ion-avatar>
+      <p>{{item.nombre}}</p>
+    </div>
   </div>
 
   <div class="productos">
-    <ion-card *ngFor="let item of productos; let i = index">
+    <ion-card *ngFor="let item of productos; let i = index" style="border-radius: 10px;">
       <ion-row >
         <ion-col size="4">
-          <img *ngIf="!item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
-          <img *ngIf="item.foto" alt="Silhouette of mountains" src="{{api+'producto/foto/'+item.foto}}" />
+          <img *ngIf="!item.foto" style="border-radius: 10px;" src="../../assets/logo-2.jpg" />
+          <img *ngIf="item.foto" style="border-radius: 10px;" src="{{api+'producto/foto/'+item.foto}}" />
         </ion-col>
         <ion-col>
           <ion-card-header style="padding: 0 !important;">
@@ -69,11 +70,11 @@
           </ion-card-header>
 
           <ion-card-content class="text-center" style="padding: 0 !important;">
-            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.pvn | currency:'MXN'}}</ion-badge>
+            <ion-badge slot="end"  color="tertiary" style="float: left; width: 30%; font-size: 8px;" class="mt-2">{{item.precioventabruto | currency:'CLP'}}</ion-badge>
             <div class="input-group mt-1" style="width: 60%; float: right;">
-              <span class="input-group-text" (click)="cantProduct('-',item._id,i)"><ion-icon  name="remove-outline"></ion-icon></span>
+              <span class="input-group-text" (click)="cantProduct('-',item.id,i)"><ion-icon  name="remove-outline"></ion-icon></span>
               <input type="number" class="form-control" value="0" style="text-align: center; font-size: 10px;" name="numbersCant[{{i}}]" [(ngModel)]="numbersCant[i]">
-              <span class="input-group-text" (click)="cantProduct('+',item._id,i)"><ion-icon name="add-outline"></ion-icon></span>
+              <span class="input-group-text" (click)="cantProduct('+',item.id,i)"><ion-icon name="add-outline"></ion-icon></span>
             </div>
           </ion-card-content>
         </ion-col>

@@ -27,6 +27,7 @@ export class LoginPage implements OnInit {
       console.log(response);
       if(response.status){
         localStorage.setItem('token',response.token)
+        localStorage.setItem('userData', JSON.stringify(response.data));
         this.router.navigate(['home'])
       }else{
         this._utils.toast(response.text,'danger');
