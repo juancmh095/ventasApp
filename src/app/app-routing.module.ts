@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'agregar-usuario',
     loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
+  },
+  {
+    path: 'pedido-info',
+    loadChildren: () => import('./modals/pedido-info/pedido-info.module').then( m => m.PedidoInfoPageModule)
   }
 
 ];

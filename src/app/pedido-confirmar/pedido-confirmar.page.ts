@@ -21,6 +21,7 @@ export class PedidoConfirmarPage implements OnInit {
     iva:0,
     cupon:'',
     tentrega:'2 dias',
+    ttentrega:0,
     persona:'',
     pagado: false,
     credito: false,

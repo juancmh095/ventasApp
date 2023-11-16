@@ -1,3 +1,36 @@
+<ion-menu contentId="main-content2">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="text-center">
+        <img src="../assets/logo-1.png" class="m-1" width="80" alt="" srcset="">
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-menu-toggle>
+      <ion-item lines="none" (click)="loadModalDir()">
+        <ion-icon name="location" slot="start" ></ion-icon>
+        <ion-label>Mis direcciones</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item lines="none" routerLink="/home/tab2">
+        <ion-icon name="document-text" slot="start"></ion-icon>
+        <ion-label>Mis Pedidos</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <div class="divisor"></div>
+    <ion-label>Categorias: </ion-label>
+    <ion-menu-toggle *ngFor="let item of data">
+      <ion-item [button]="true" lines="none" class="catMenu" (click)="info(item.productos)">
+        <ion-avatar slot="start" style=" width: 45px; height: 45px;">
+          <img src="{{api+'lioren/file/'+item.nombre+'.png'}}" style="width: auto;">
+        </ion-avatar>
+        <ion-label style="font-size: 12px;">{{item.nombre}}</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-content>
+</ion-menu>
 <ion-header [translucent]="true" id="main-content">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -14,7 +47,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="main-content" style="--background: #F8F9F9;">
+<ion-content [fullscreen]="true" id="main-content2" style="--background: #F8F9F9;">
 
   <ion-refresher slot="fixed" (ionRefresh)="loadInfoProductos($event)">
     <ion-refresher-content></ion-refresher-content>

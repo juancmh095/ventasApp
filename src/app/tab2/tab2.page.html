@@ -1,36 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Mis Pedidos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card style="border-radius: 10px;">
-    <ion-card-header style="padding-bottom: 0px;">
+  <ion-card style="border-radius: 10px;" *ngFor="let item of data">
+    <ion-card-header style="padding-bottom: 0px;" (click)="openModalPedido(item)">
       <ion-card-title>
-        <img alt="" width="40" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        Pedido #
+        <img alt="" width="40" src="../../assets/logo-2.jpg" />
+        Pedido #{{item.folio}}
       </ion-card-title>
       <ion-card-subtitle>
-        <div class="badge bg-success"> Estatus:</div>
+        <div class="badge {{statusColor[item.status]}}">{{status[item.status]}}</div>
       </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content style="padding-bottom: 0px;">
       <ion-accordion-group (ionChange)="accordionGroupChange($event)">
         <ion-accordion value="first">
-          <ion-item slot="header" color="">
-            <ion-label>Detalle de productos</ion-label>
+          <ion-item slot="header" color="" >
+            <ion-label style="font-size: 14px;">Detalle de productos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">First Content</div>
+          <div class="ion-padding" slot="content">
+            <ion-item *ngFor="let p of item.productos" [button]="true" lines="none">
+              <ion-avatar slot="start">
+                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label style="font-size: 12px;">{{p.producto?.nombre}}</ion-label>
+              <ion-note slot="end">x{{p.cantidad}}  {{((p.producto?.precioventabruto)*(p.cantidad)) | currency:'CLP'}}</ion-note>
+            </ion-item>
+          </div>
         </ion-accordion>
       </ion-accordion-group>
     </ion-card-content>
     <ion-item lines="none">
-      <ion-label style="font-size: 12px;">Total</ion-label>
-      <ion-note slot="start">fecha</ion-note>
+      <ion-label style="font-size: 12px;"><strong>Total: </strong> {{item.total | currency:'CLP'}}</ion-label>
+      <ion-note slot="start">Fecha: {{item.create_at | date:'dd/MM/yyyy hh:mm'}} </ion-note>
     </ion-item>
   </ion-card>
 </ion-content>

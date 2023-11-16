@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Pedido #{{data.folio}} <div class="badge {{statusColor[data.status]}}">{{status[data.status]}}</div></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Detalle de productos</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item *ngFor="let item of data.productos" [button]="true" lines="none">
+        <ion-label style="font-size: 12px;">{{item.producto?.nombre}}</ion-label>
+        <ion-note slot="end">x{{item.cantidad}}  {{((item.producto?.precioventabruto)*(item.cantidad)) | currency:'CLP'}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14px;">Tarifa de entrega</ion-label>
+        <ion-note slot="end">{{data.ttentrega | currency:'CLP'}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14Px;">Comentarios</ion-label>
+        <ion-note slot="end">{{data.comentarios}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14px;">Total</ion-label>
+        <ion-note slot="end" style="color: black; font-size: 16px; font-weight: 900;">{{data.total | currency:'CLP'}}</ion-note>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Detalle de Entrega</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div id="map" class="m-auto" style="height: 40vh !important; width: 80vw;"></div>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14px;">Dirección de entrega</ion-label>
+        <ion-note slot="end">{{data.direccion.place_name}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14Px;">ID del pedido</ion-label>
+        <ion-note slot="end">{{data._id}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none">
+        <ion-label style="font-size: 14Px;">Hora del pedido</ion-label>
+        <ion-note slot="end">{{data.create_at | date:'dd/MM/YYYY HH:MM'}}</ion-note>
+      </ion-item>
+      <ion-item [button]="true" lines="none" *ngIf="data.entregado">
+        <ion-label style="font-size: 14Px;">Hora de Entrega</ion-label>
+        <ion-note slot="end">{{data.entregado | date:'dd/MM/YYYY HH:MM'}}</ion-note>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Comentarios del Negocio</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item [button]="true" lines="none" *ngFor="let item of data.cTienda">
+        <ion-label style="font-size: 14px;">{{item}}</ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
