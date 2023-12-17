@@ -4,6 +4,7 @@ import { AgregarDireccionPage } from '../direcciones/agregar-direccion/agregar-d
 import { UtilsService } from 'src/services/utils.service';
 import { ApiService } from 'src/services/api.service';
 import { Router } from '@angular/router';
+import { ListadoDireccionesPage } from '../direcciones/listado-direcciones/listado-direcciones.page';
 
 
 @Component({
@@ -54,7 +55,7 @@ export class PedidoConfirmarPage implements OnInit {
 
   async loadModalDir(){
     const modal = await this.modalCtrl.create({
-      component: AgregarDireccionPage,
+      component: ListadoDireccionesPage,
     });
     modal.present();
 
@@ -64,11 +65,18 @@ export class PedidoConfirmarPage implements OnInit {
       console.log(data)
       var dt:any = localStorage.getItem('myDireccionVT');
       this.model.direccion = JSON.parse(dt);
+      console.log(this.model);
     }
 
   }
 
   async save(){
+    var usr:any = await localStorage.getItem('userData');
+    var usuario = JSON.parse(usr);
+    this.model.usuario = usuario._id;
+    this.model.direccionID = this.model.direccion._id;
+    this.model.mPago = this.model.tarjeta._id;
+
     if(Object.keys(this.model.direccion).length == 0){
       console.log('no tiene direccion');
       return await this._Utils.toast("Faltan datos de la direccion de entrega","danger");

@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Agregar Tarjeta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-input label="Titular de la cuenta" labelPlacement="floating" placeholder="John..." name="nombre" [(ngModel)]="model.nombre"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-input label="Numero de tarjeta" labelPlacement="floating" placeholder="XXXX XXXX XXXX XXXX" name="numero" [(ngModel)]="model.numero"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3">
+      <ion-item>
+        <ion-input label="Mes" labelPlacement="floating" placeholder="01" maxlength="2" min="1" max="12" type="number" name="mes" [(ngModel)]="model.mes"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="3">
+      <ion-item>
+        <ion-input label="Año" labelPlacement="floating" placeholder="01" maxlength="2" min="1" type="number" name="anio" [(ngModel)]="model.anio"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item>
+        <ion-input label="CVV" labelPlacement="floating" placeholder="01" maxlength="3" min="1" type="number" name="" [(ngModel)]="model.cvv"></ion-input>
+      </ion-item>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-button type="button" (click)="save()" expand="block" class="mt-5">Guardar</ion-button>
+  <ion-button type="button" (click)="close()" color="danger" expand="block" class="mt-1">Cancelar</ion-button>
+</ion-content>

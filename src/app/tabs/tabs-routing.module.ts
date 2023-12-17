@@ -40,6 +40,14 @@ const routes: Routes = [
       {
         path: 'pedidos',
         loadChildren: () => import('../pedidos/pedidos.module').then( m => m.PedidosPageModule)
+      },
+      {
+        path: 'agregar-tarjeta',
+        loadChildren: () => import('../metodosPagos/agregar-tarjeta/agregar-tarjeta.module').then( m => m.AgregarTarjetaPageModule)
+      },
+      {
+        path: 'listado-tarjeta',
+        loadChildren: () => import('../metodosPagos/listado-tarjeta/listado-tarjeta.module').then( m => m.ListadoTarjetaPageModule)
       }
     ]
   },

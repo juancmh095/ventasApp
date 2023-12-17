@@ -1,13 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>listadoDirecciones</ion-title>
+    <ion-title>Mis Direcciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">listadoDirecciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card class="pb-1" *ngFor="let item of direcciones" (click)="changeDir(item)">
+    <ion-card-header>
+      <ion-card-title>{{item.nombre}}</ion-card-title>
+      <ion-card-subtitle>{{item.lugar}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-badge color="success" *ngIf="direccion._id === item._id"><ion-icon name="checkmark-circle-outline"></ion-icon> Seleccionada</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button type="button" (click)="loadModalDir()" expand="block" class="mt-5">Agregar Dirección</ion-button>
+  <ion-button type="button" routerLink="/home/tab1" color="dark" expand="block" class="mt-1">Regresar</ion-button>
 </ion-content>

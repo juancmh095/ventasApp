@@ -5,7 +5,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar animated="true" placeholder="Animated" (keyup)="loadDireccion($event)"></ion-searchbar>
+  <ion-searchbar animated="true" placeholder="Buscar Dirección" (keyup)="loadDireccion($event)"></ion-searchbar>
+
+
+  <ion-item>
+    <ion-input label="Alias" name="nombre" [(ngModel)]="model.nombre"></ion-input>
+  </ion-item>
+
 
   <ion-list>
     <ion-item *ngFor="let item of direcciones">
@@ -19,5 +25,6 @@
 
 
   <ion-button type="button" (click)="saveDir()" expand="block" class="mt-5">Guardar</ion-button>
+  <ion-button type="button" (click)="close()" expand="block" color="danger" class="mt-5">Cerrar</ion-button>
 
 </ion-content>

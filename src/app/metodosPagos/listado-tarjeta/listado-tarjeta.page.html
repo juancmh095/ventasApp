@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mi Cartera</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="pb-1" *ngFor="let item of tarjetas" (click)="changeTar(item)">
+    <ion-card-header>
+      <ion-card-title>{{item.nombre}}</ion-card-title>
+      <ion-card-subtitle>{{item.numero}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-badge color="success" *ngIf="tarjeta._id === item._id"><ion-icon name="checkmark-circle-outline"></ion-icon> Seleccionada</ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button type="button" (click)="loadModalCart()" expand="block" class="mt-5">Agregar Nueva Tarjeta</ion-button>
+  <ion-button type="button" routerLink="/home/tab1" color="dark" expand="block" class="mt-1">Regresar</ion-button>
+</ion-content>
