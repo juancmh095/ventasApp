@@ -5,6 +5,7 @@ import { UtilsService } from 'src/services/utils.service';
 import { ApiService } from 'src/services/api.service';
 import { Router } from '@angular/router';
 import { ListadoDireccionesPage } from '../direcciones/listado-direcciones/listado-direcciones.page';
+import { ListadoTarjetaPage } from '../metodosPagos/listado-tarjeta/listado-tarjeta.page';
 
 
 @Component({
@@ -38,12 +39,14 @@ export class PedidoConfirmarPage implements OnInit {
 
   ngOnInit() {
     var dir:any = localStorage.getItem('myDireccionVT')?localStorage.getItem('myDireccionVT'):'{}';
+    var tar:any = localStorage.getItem('mPagoVT')?localStorage.getItem('mPagoVT'):'{}';
     this.model.direccion = JSON.parse(dir);
+    this.model.tarjeta = JSON.parse(tar);
 
     var prod:any = localStorage.getItem('carrito')?localStorage.getItem('carrito'):'[]';
     var person:any = localStorage.getItem('userData')?localStorage.getItem('userData'):'[]';
     person = JSON.parse(person);
-    this.model.persona = person._id;
+    this.model.persona = person.persona._id;
     this.model.productos = JSON.parse(prod);
     this.model.productos.forEach((element:any,index:any) => {
       this.model.subtotal += element.producto.precioventabruto;
@@ -73,7 +76,7 @@ export class PedidoConfirmarPage implements OnInit {
   async save(){
     var usr:any = await localStorage.getItem('userData');
     var usuario = JSON.parse(usr);
-    this.model.usuario = usuario._id;
+    this.model.usuario = usuario.persona._id;
     this.model.direccionID = this.model.direccion._id;
     this.model.mPago = this.model.tarjeta._id;
 
@@ -97,6 +100,22 @@ export class PedidoConfirmarPage implements OnInit {
         this._Utils.toast("Error al procesar el pedido","danger");
       }
     });
+  }
+
+  async loadModalCard(){
+    const modal = await this.modalCtrl.create({
+      component: ListadoTarjetaPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log(data)
+      var dt:any = localStorage.getItem('mPagoVT');
+      this.model.tarjeta = JSON.parse(dt);
+      console.log(this.model);
+    }
   }
 
 }

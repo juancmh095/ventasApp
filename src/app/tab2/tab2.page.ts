@@ -23,7 +23,7 @@ export class Tab2Page implements OnInit {
     var dt:any = localStorage.getItem('userData');
     this.usuario = JSON.parse(dt);
     let model = {
-      persona: this.usuario
+      persona: this.usuario.persona._id
     }
     this._api.get('ventas',model).then((response:any) => {
       console.log(response);

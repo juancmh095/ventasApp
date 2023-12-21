@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card (click)="loadModalDir()">
+  <ion-card (click)="loadModalCard()">
     <ion-card-header>
       <ion-card-title>Direccion de entrega</ion-card-title>
       <ion-card-subtitle>{{model.direccion?.lugar}}</ion-card-subtitle>
@@ -23,7 +23,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Método de pago</ion-card-title>
-      <ion-card-subtitle>4242 4242 4242 4242</ion-card-subtitle>
+      <ion-card-subtitle>{{model.tarjeta.numero}}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 

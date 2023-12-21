@@ -39,9 +39,14 @@ export class ListadoTarjetaPage implements OnInit {
   }
 
   changeTar(item:any){
-    var dir = JSON.stringify(item);
-    this.tarjeta = item;
-    var tar = localStorage.setItem('mPagoVT',dir);
+    try {
+      var dir = JSON.stringify(item);
+      this.tarjeta = item;
+      var tar = localStorage.setItem('mPagoVT',dir);
+      this.modalCtrl.dismiss('confirmar', 'confirm');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
