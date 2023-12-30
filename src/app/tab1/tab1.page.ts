@@ -23,6 +23,7 @@ export class Tab1Page {
   productos:any = [];
   productosSelect:any = [];
   numbersCant:any = [];
+  cupones:any = [];
   api:any = environment.api;
   constructor(public _api:ApiService,
     private _productosService:ProductosService,
@@ -36,6 +37,8 @@ export class Tab1Page {
     console.log(this.direccion);
     this.loadInfoProductos({});
     this.loadStorageCarrito();
+
+    this.getCupones();
 
     const myCarouselElement = document.querySelector('#promosBanner')
 
@@ -149,6 +152,16 @@ export class Tab1Page {
       this.direccion = JSON.parse(dt);
     }
 
+  }
+
+  getCupones(){
+    var model = {
+      delete: false
+    }
+    this._api.get('cupon', model).then((response:any) => {
+      console.log(response);
+      this.cupones = response.data;
+    });
   }
 
 }
