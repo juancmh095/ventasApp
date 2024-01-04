@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-carrito',
@@ -13,7 +15,10 @@ export class CarritoPage implements OnInit {
   numbersCant:any = [];
   subtotal:any = 0;
   total:any = 0;
-  constructor(private modalCtrl: ModalController, private router:Router) {}
+  api:any = ''
+  constructor(private modalCtrl: ModalController, private router:Router) {
+    this.api = environment.api;
+  }
 
   ngOnInit() {
     var c:any = localStorage.getItem('carrito');

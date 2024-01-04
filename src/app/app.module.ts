@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -11,11 +11,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenHttpInterceptor } from 'src/auth/token-http.interceptor';
 import { HttpErrorInterceptor } from 'src/interceptors/http-error.interceptor';
 
+import { MaskitoModule } from '@maskito/angular';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    MaskitoModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoianVhbm1lbmRlejk1IiwiYSI6ImNrdnFkNTk4dWRnNXUydnQ5YjN2ZGpndWEifQ.HkeKq336tquedpaUp_gJrQ', // Optional, can also be set per map (accessToken input of mgl-map)
     }),
@@ -29,5 +31,6 @@ import { HttpErrorInterceptor } from 'src/interceptors/http-error.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

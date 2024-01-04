@@ -30,6 +30,8 @@ export class PedidoConfirmarPage implements OnInit {
     origin:'app',
     comentarios:''
   };
+
+  cupon:any = '';
   constructor(
     private modalCtrl:ModalController,
     private _Utils:UtilsService,
@@ -56,6 +58,15 @@ export class PedidoConfirmarPage implements OnInit {
     console.log(this.model);
   }
 
+  loadTotal(){
+    this.model.subtotal = 0;
+    this.model.total = 0;
+    this.model.productos.forEach((element:any,index:any) => {
+      this.model.subtotal += element.producto.precioventabruto;
+      this.model.total += (element.producto.precioventabruto * 1.18);
+    });
+  }
+
   async loadModalDir(){
     const modal = await this.modalCtrl.create({
       component: ListadoDireccionesPage,
@@ -71,6 +82,26 @@ export class PedidoConfirmarPage implements OnInit {
       console.log(this.model);
     }
 
+  }
+
+  validarCupon(){
+    let model = {
+      total:  this.model.total,
+      nombre: this.cupon
+    };
+    console.log(model);
+    this._api.get('cupon/validar',model).then((response:any)=>{
+      console.log(response);
+      if(response.status){
+        this.model.cupon = response.data;
+        this.model.descuento = response.total;
+        this.model.total  =  this.model.total - this.model.descuento;
+        this._Utils.toast(response.text, "success")
+      }else{
+        this.loadTotal();
+        this._Utils.toast(response.text, "danger")
+      }
+    });
   }
 
   async save(){
@@ -90,10 +121,12 @@ export class PedidoConfirmarPage implements OnInit {
     this._api.post('venta/nueva',this.model).then(async (response:any) => {
       console.log(response);
       if(response.status){
+        this._Utils.spinner();
         this._Utils.toast("Pedido generado","success");
         setTimeout(async () => {
           await this._Utils.stopSpinner();
           localStorage.removeItem('carrito');
+          this._Utils.stopSpinner();
           this.router.navigateByUrl('/home/tab1')
         }, 5000);
       }else{

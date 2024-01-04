@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from 'src/services/api.service';
 import { UtilsService } from 'src/services/utils.service';
+import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 
 @Component({
   selector: 'app-agregar-tarjeta',
@@ -9,6 +10,27 @@ import { UtilsService } from 'src/services/utils.service';
   styleUrls: ['./agregar-tarjeta.page.scss'],
 })
 export class AgregarTarjetaPage implements OnInit {
+
+
+  readonly phoneMask: MaskitoOptions = {
+    mask: ['+', '1', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  };
+
+  readonly cardMask: MaskitoOptions = {
+    mask: [
+      ...Array(4).fill(/\d/),
+      ' ',
+      ...Array(4).fill(/\d/),
+      ' ',
+      ...Array(4).fill(/\d/),
+      ' ',
+      ...Array(4).fill(/\d/),
+      ' ',
+      ...Array(3).fill(/\d/),
+    ],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   model:any = {};
 

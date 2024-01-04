@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card (click)="loadModalCard()">
+  <ion-card (click)="loadModalDir()">
     <ion-card-header>
       <ion-card-title>Direccion de entrega</ion-card-title>
       <ion-card-subtitle>{{model.direccion?.lugar}}</ion-card-subtitle>
@@ -20,7 +20,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card (click)="loadModalCard()">
     <ion-card-header>
       <ion-card-title>Método de pago</ion-card-title>
       <ion-card-subtitle>{{model.tarjeta.numero}}</ion-card-subtitle>
@@ -56,6 +56,16 @@
   </ion-card>
 
   <ion-card>
+    
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-input label="Codigo de descuento" labelPlacement="floating" name="cupon" [(ngModel)]="cupon"></ion-input>
+        <ion-button size="small" (click)="validarCupon()">Canjear</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
     <ion-card-header>
       <ion-card-title>Total</ion-card-title>
     </ion-card-header>
@@ -71,8 +81,12 @@
           <ion-note slot="end">{{model.iva | currency:'CLP'}}</ion-note>
         </ion-item>
         <ion-item  [button]="true" lines="none">
+          <ion-label>Descuento</ion-label>
+          <ion-note slot="end">- {{model.descuento?model.descuento:0 | currency:'CLP'}}</ion-note>
+        </ion-item>
+        <ion-item  [button]="true" lines="none">
           <ion-label>Total:</ion-label>
-          <ion-note slot="end">{{model.total | currency:'CLP'}}</ion-note>
+          <ion-note slot="end">{{model.total| currency:'CLP'}}</ion-note>
         </ion-item>
         <ion-item  [button]="true" lines="none">
           <ion-label>Tarifa de entrega:</ion-label>

@@ -15,8 +15,7 @@
     <ion-card *ngFor="let item of productosSelect; let i = index">
       <ion-row >
         <ion-col size="4">
-          <img *ngIf="!item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
-          <img *ngIf="item.foto" alt="Silhouette of mountains" src="../../assets/logo-2.jpg" />
+          <img alt="Silhouette of mountains" src="{{api+'lioren/image/'+item.producto.id+'.jpg'}}" />
         </ion-col>
         <ion-col>
           <ion-card-header style="padding: 0 !important;">
