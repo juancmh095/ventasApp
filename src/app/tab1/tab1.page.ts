@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/services/api.service';
 import { CarritoPage } from '../carrito/carrito.page';
@@ -25,6 +25,8 @@ export class Tab1Page {
   numbersCant:any = [];
   cupones:any = [];
   api:any = environment.api;
+  numPage:any = 1;
+  searchP:string = '';
   constructor(public _api:ApiService,
     private _productosService:ProductosService,
     private modalCtrl: ModalController,
@@ -57,14 +59,52 @@ export class Tab1Page {
 
 
   loadInfoProductos(event:any){
-    this._productosService.get().then((response:any)=>{
+    this. numPage = 1;
+    this.productos = [];
+    var filter = {
+      page:this.numPage,
+      rpp: 100
+    };
+    this._productosService.get(filter).then((response:any)=>{
       console.log(response);
-      this.data = response;
-      this.productos = this.data[0].productos;
+      //this.data = response;
+      this.productos = response;
       this.numbersCant = [];
       event.target?.complete();
       this.stopSpinner();
     })
+   /*  this._api.get('producto/categorias',{}).then((response:any) => {
+    }); */
+  }
+
+  loadInfoProductosScroll(event:any){
+    if(this.searchP != ''){
+      let filter = {
+        page:this.numPage,
+        rpp: 100,
+        nombre: this.searchP
+      };
+      this._productosService.get(filter).then((response:any)=>{
+        console.log(response);
+        response.forEach((p:any) => {
+          this.productos.push(p);
+        });
+        this.stopSpinner();
+      })
+    }else{
+      var filter = {
+        page:this.numPage,
+        rpp: 100
+      };
+      this._productosService.get(filter).then((response:any)=>{
+        console.log(response);
+        response.forEach((element:any) => {
+          this.productos.push(element);
+        });
+        event.target?.complete();
+        this.stopSpinner();
+      });
+    }
    /*  this._api.get('producto/categorias',{}).then((response:any) => {
     }); */
   }
@@ -162,6 +202,31 @@ export class Tab1Page {
       console.log(response);
       this.cupones = response.data;
     });
+  }
+
+  onIonInfinite($event:any){
+    this.numPage = this.numPage +1;
+    this.loadInfoProductosScroll({});
+    setTimeout(() => {
+      ($event as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
+
+  loadProductosName(event:any){
+    if(this.searchP == ''){
+      this.loadInfoProductos({});
+    }else{
+      var filter = {
+        page:1,
+        rpp: 100,
+        nombre: this.searchP
+      };
+      this._productosService.get(filter).then((response:any)=>{
+        console.log(response);
+        this.productos = response;
+        this.stopSpinner();
+      })
+    }
   }
 
 }

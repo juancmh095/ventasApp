@@ -80,14 +80,22 @@
     </div>
   </div>
 
-  <p style="margin: 15px 15px; font-weight: 900;">Categorias:</p>
+  <!-- <p style="margin: 15px 15px; font-weight: 900;">Categorias:</p> -->
   <div class="horizontal-scroll-contenedor">
-    <div class="text-center" *ngFor="let item of data" (click)="info(item.productos)">
+    <!-- <div class="text-center" *ngFor="let item of data" (click)="info(item.productos)">
       <ion-avatar style="margin: auto !important; width: 45px; height: 45px;">
         <img src="{{api+'lioren/file/'+item.nombre+'.png'}}" style="width: auto;">
       </ion-avatar>
       <p>{{item.nombre}}</p>
-    </div>
+    </div> -->
+    <ion-searchbar 
+      placeholder="Buscar Producto por nombre" id="searchP" 
+      show-cancel-button="never" 
+      (change)="loadProductosName($event)" 
+      name="searchP" 
+      [(ngModel)]="searchP"
+      (ionClear)="loadInfoProductos({})"
+    ></ion-searchbar>
   </div>
 
   <div class="productos">
@@ -115,5 +123,8 @@
         </ion-col>
       </ion-row>
     </ion-card>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

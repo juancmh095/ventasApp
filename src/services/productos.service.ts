@@ -13,12 +13,13 @@ export class ProductosService {
   constructor(private _utils:UtilsService, private _http:HttpClient) { }
 
 
-  get(): Promise<any> {
+  get(x:any): Promise<any> {
     this._utils.spinner();
     return new Promise((resolve:any)=>{
       try {
         console.log(this.urlApi);
-        this._http.get(this.urlApi + 'lioren/productos' ).subscribe((resultado:any)=>{
+        var filters = JSON.stringify(x);
+        this._http.get(this.urlApi + 'lioren/productos',{params:{filters}}).subscribe((resultado:any)=>{
           this._utils.stopSpinner();
           resolve(resultado);
         });
