@@ -25,6 +25,12 @@
         <ion-label>Mis Pedidos</ion-label>
       </ion-item>
     </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item lines="none" routerLink="/tickets">
+        <ion-icon name="chatbubble-ellipses" slot="start"></ion-icon>
+        <ion-label>Soporte</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
     <div class="divisor"></div>
     <ion-label>Categorias: </ion-label>
     <ion-menu-toggle *ngFor="let item of data">
@@ -88,11 +94,11 @@
       </ion-avatar>
       <p>{{item.nombre}}</p>
     </div> -->
-    <ion-searchbar 
-      placeholder="Buscar Producto por nombre" id="searchP" 
-      show-cancel-button="never" 
-      (change)="loadProductosName($event)" 
-      name="searchP" 
+    <ion-searchbar
+      placeholder="Buscar Producto por nombre" id="searchP"
+      show-cancel-button="never"
+      (change)="loadProductosName($event)"
+      name="searchP"
       [(ngModel)]="searchP"
       (ionClear)="loadInfoProductos({})"
     ></ion-searchbar>

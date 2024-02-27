@@ -19,6 +19,14 @@ const routes: Routes = [
   {
     path: 'pedido-info',
     loadChildren: () => import('./modals/pedido-info/pedido-info.module').then( m => m.PedidoInfoPageModule)
+  },
+  {
+    path: 'soporte',
+    loadChildren: () => import('./soporte/soporte.module').then( m => m.SoportePageModule)
+  },
+  {
+    path: 'tickets',
+    loadChildren: () => import('./tickets/tickets.module').then( m => m.TicketsPageModule)
   }
 
 ];

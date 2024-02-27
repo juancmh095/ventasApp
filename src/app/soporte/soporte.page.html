@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      Soporte
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container" style="margin-top: 20px;">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Asunto" name="asunto" [(ngModel)]="model.asunto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Correo" name="correo" [(ngModel)]="model.correo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Telefono" name="telefono" [(ngModel)]="model.telefono"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea label="Cuentame tu problema" labelPlacement="floating" placeholder="Da información necesaria para poder ayudarte" rows="10" name="descripcion" [(ngModel)]="model.descripcion"></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" (click)="save()">Enviar</ion-button>
+  </div>
+
+</ion-content>

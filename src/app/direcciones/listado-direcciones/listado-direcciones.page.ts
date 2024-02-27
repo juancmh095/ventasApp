@@ -18,6 +18,7 @@ export class ListadoDireccionesPage implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.getSucursales();
   }
 
   async loadData(){
@@ -30,6 +31,25 @@ export class ListadoDireccionesPage implements OnInit {
       console.log(response);
       this.direcciones = response.data;
       this.loadDireccionCargada();
+    });
+  }
+
+  async getSucursales(){
+    let model = {
+    };
+    this._api.get('lioren/sucursales', model).then((response:any) => {
+      console.log(response);
+      response.data.forEach((element:any) => {
+        let model = {
+          nombre: 'RECOGER EN TIENDA: '+element.nombre,
+          lugar: element.direccion,
+          _id: element.codigo,
+          maps: null
+        }
+
+        this.direcciones.push(model);
+      });
+
     });
   }
 

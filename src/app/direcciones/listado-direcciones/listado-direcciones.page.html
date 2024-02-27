@@ -12,9 +12,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-badge color="success" *ngIf="direccion._id === item._id"><ion-icon name="checkmark-circle-outline"></ion-icon> Seleccionada</ion-badge>
+      <ion-badge color="success" *ngIf="direccion?._id === item._id"><ion-icon name="checkmark-circle-outline"></ion-icon> Seleccionada</ion-badge>
     </ion-card-content>
   </ion-card>
+
 
   <ion-button type="button" (click)="loadModalDir()" expand="block" class="mt-5">Agregar Dirección</ion-button>
   <ion-button type="button" routerLink="/home/tab1" color="dark" expand="block" class="mt-1">Regresar</ion-button>
