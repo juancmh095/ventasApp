@@ -23,6 +23,7 @@ export class Tab1Page {
   productos:any = [];
   productosSelect:any = [];
   numbersCant:any = [];
+  categorias:any = [];
   cupones:any = [];
   api:any = environment.api;
   numPage:any = 1;
@@ -37,6 +38,7 @@ export class Tab1Page {
     var dt:any = localStorage.getItem('myDireccionVT');
     this.direccion = JSON.parse(dt);
     console.log(this.direccion);
+    this.getCategorias();
     this.loadInfoProductos({});
     this.loadStorageCarrito();
 
@@ -48,6 +50,14 @@ export class Tab1Page {
       interval: 3000,
       touch: false
     })
+  }
+
+
+  getCategorias(){
+    this._api.get('producto/categorias',{}).then((response:any) => {
+      console.log('CATEGORIAS:::::::::::::::::::::>',response);
+      this.categorias = response.data;
+    });
   }
 
   loadStorageCarrito(){
@@ -66,7 +76,6 @@ export class Tab1Page {
       rpp: 100
     };
     this._productosService.get(filter).then((response:any)=>{
-      console.log(response);
       //this.data = response;
       this.productos = response;
       this.numbersCant = [];
@@ -85,7 +94,6 @@ export class Tab1Page {
         nombre: this.searchP
       };
       this._productosService.get(filter).then((response:any)=>{
-        console.log(response);
         response.forEach((p:any) => {
           this.productos.push(p);
         });
@@ -199,7 +207,6 @@ export class Tab1Page {
       delete: false
     }
     this._api.get('cupon', model).then((response:any) => {
-      console.log(response);
       this.cupones = response.data;
     });
   }
@@ -222,7 +229,6 @@ export class Tab1Page {
         nombre: this.searchP
       };
       this._productosService.get(filter).then((response:any)=>{
-        console.log(response);
         this.productos = response;
         this.stopSpinner();
       })

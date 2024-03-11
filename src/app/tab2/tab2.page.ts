@@ -31,6 +31,8 @@ export class Tab2Page implements OnInit {
     });
   }
 
+
+
   accordionGroupChange = (ev: any) => {
     const collapsedItems = this.values.filter((value) => value !== ev.detail.value);
     const selectedValue = ev.detail.value;
