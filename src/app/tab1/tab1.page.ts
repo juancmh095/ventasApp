@@ -28,6 +28,7 @@ export class Tab1Page {
   api:any = environment.api;
   numPage:any = 1;
   searchP:string = '';
+  inititalProducts:any = false;
   constructor(public _api:ApiService,
     private _productosService:ProductosService,
     private modalCtrl: ModalController,
@@ -115,6 +116,22 @@ export class Tab1Page {
     }
    /*  this._api.get('producto/categorias',{}).then((response:any) => {
     }); */
+  }
+
+  loadproductCategoria(name:any){
+    var categoria = name.toUpperCase();
+    console.log(categoria);
+    var filter = {
+      page:this.numPage,
+      rpp: 100,
+      nombre: name
+    };
+    this._productosService.get(filter).then((response:any)=>{
+      console.log(response);
+      this.productos = response;
+      this.inititalProducts = true;
+      this.stopSpinner();
+    });
   }
 
   info(data:any){

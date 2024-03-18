@@ -104,10 +104,10 @@
     ></ion-searchbar>
   </div>
 
-  <div class="categorias">
+  <div class="categorias" *ngIf="!inititalProducts">
     <ion-row>
       <ion-col size="4" *ngFor="let item of categorias; let i = index">
-        <ion-card style="border-radius: 10px; margin: 0;">
+        <ion-card style="border-radius: 10px; margin: 0;" (click)="loadproductCategoria(item.nombre)">
           <ion-row>
             <ion-col size="12" style="text-align: center;">
               <img style="border-radius: 10px;" width="60" src="{{item.icon}}" />
@@ -125,7 +125,8 @@
     </ion-row>
   </div>
 
-  <div class="productos">
+  <div class="productos" *ngIf="inititalProducts">
+    <a class="m-1" style="text-decoration: none;" (click)="inititalProducts = false"><ion-icon name="caret-back-outline"></ion-icon> Regresar</a>
     <ion-card *ngFor="let item of productos; let i = index" style="border-radius: 10px;">
       <ion-row >
         <ion-col size="4">
